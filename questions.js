@@ -3,7 +3,7 @@
 
 /*WHEN I start the application
 THEN I am presented with the following options: view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role */
-const mainQuestions =  [
+const mainQuestion =  [
     {
         type : 'list',
         name : 'option',
@@ -21,7 +21,7 @@ const mainQuestions =  [
             //The "value" property is what gets returned in the data object when the user makes a selection. 
             //It's used to identify the choice that the user picked in your code logic.
         ]
-    }
+    },
 ]
 
 
@@ -107,4 +107,4 @@ const QuestionsForUpdatingAnEmployeesRole = [
     }
 ]
 
-module.exports = { mainQuestions, QuestionForAddingADepartment, QuestionsForAddingARole, QuestionsForAddingAnEmployee, QuestionsForUpdatingAnEmployeesRole}
+module.exports = { mainQuestion, QuestionForAddingADepartment, QuestionsForAddingARole, QuestionsForAddingAnEmployee, QuestionsForUpdatingAnEmployeesRole}
