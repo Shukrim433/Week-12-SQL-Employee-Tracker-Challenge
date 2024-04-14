@@ -25,8 +25,7 @@ CREATE TABLE employee (
     role_id INTEGER NOT NULL,
     manager_id INTEGER, --the purpose of the manager_id column id to hold a reference [ie the employee id of] to another employee who is 
     --the manager of the current employee. If an employee has no manager the manager_id will be NULL
-    FOREIGN KEY (role_id)
-    REFERENCES role(id)
-    ON DELETE SET NULL
+    FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE SET NULL,
+    FOREIGN KEY (manager_id) REFERENCES employee(id) ON DELETE SET NULL
 );
 
