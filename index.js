@@ -16,3 +16,33 @@ const db = new EmployeeDatabase({
 //to connect to the database:
 db.connect()
 
+// switch statement
+const handleMainQuestion = () => {
+    inquirer
+    .prompt(mainQuestion)
+    .then((responseObj) => {
+        switch (responseObj.option) { //'option' is the option the user selects in response to the main question "what would you like to do?"
+            case 'view_departments':
+                view_departments();
+                break;
+            case 'view_roles' :
+                view_roles();
+                break;
+            case 'view_employees' :    //this switch statement checks what the response to the main question "what would you like to do?"
+                view_employees();       // if it matches any of these options from the choices list it excecutes its corresponding question
+                break;
+            case 'add_department':
+                add_department();
+                break;
+            case 'add_role':
+                add_role();
+                break;
+            case 'add_employee':
+                add_employee();
+                break;
+            case 'update_role':
+                update_role();
+                break;
+        }
+    })
+}
