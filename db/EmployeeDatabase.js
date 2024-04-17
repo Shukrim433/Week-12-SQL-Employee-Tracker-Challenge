@@ -81,6 +81,48 @@ addDepartment(department) { //what is department? its the users response aka the
 }
 
 
+/*WHEN I choose to add a role
+THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database */
+addRole(role) { //what is role????????
+    return new Promise((resolve, reject) => {
+        this.db.query(`INSERT INTO role (title, salary, department_id) VALUES ($1, $2, $3)`, [role.title, role.salary, role.department], (err, results) => { //department_name is the department name the user enters when promted to by inquirer
+            if (err) {
+                reject(err)
+            }
+            resolve(`new role ${role.title} added successfully to the database`) //not using 'result' cuz the promt is just asking to add a record to the database not to add AND see it.
 
+        })
+    })
+}
+
+
+/*WHEN I choose to add an employee
+THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database */
+addEmployee(employee) { //what is employee????????
+    return new Promise((resolve, reject) => {
+        this.db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4)`, [employee.first_name, employee.last_name, employee.role_id, employee.manager_id], (err, results) => {
+            if (err) {
+                reject(err)
+            }
+            resolve(`new employee ${employee.first_name} ${employee.last_name} added successfully to the database`) //not using 'result' cuz the promt is just asking to add a record to the database not to add AND see it.
+
+        })
+    })
+}
+
+
+/*WHEN I choose to update an employee role
+THEN I am prompted to select an employee to update and their new role and this information is updated in the database  */
+updateEmployee(employee) { //what is employee????????
+    return new Promise((resolve, reject) => {
+        this.db.query(`UPDATE employee SET role_id = $1 WHERE id = $2`, [employee.role_id, employee.id], (err, results) => {
+            if (err) {
+                reject(err)
+            }
+            resolve(`employee number ${employee.id}'s information was successfully updated in the database`) //in the example sir just pu the result in the resolve()
+
+        })
+    })
+}
 
 }
