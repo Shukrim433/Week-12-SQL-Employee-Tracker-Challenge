@@ -46,3 +46,34 @@ const handleMainQuestion = () => {
         }
     })
 }
+
+const view_departments = () => {
+    
+    db.getDepartments() //call the .getDepartments() method (from the EmployeeDatabase class) to query the database.
+    .then(({rows}) => { //result holds the result of that query to the database
+        
+        console.table(rows) //log the result in the console as a table
+
+        handleMainQuestion()//show the main question again
+    })
+}
+
+const view_roles = () => {
+    
+    db.getRoles() //call the .getRoles() method (from the EmployeeDatabase class) to query the database.
+    .then(({rows}) => { //result holds the result of that query to the database
+        console.table(rows) //log the result in the console as a table
+
+        handleMainQuestion()//show the main question again
+    })
+}
+
+const view_employees = () => {
+    
+    db.getEmployees() //call the .getEmployees() method (from the EmployeeDatabase class) to query the database.
+    .then(({rows}) => { //result holds the result of that query to the database
+        console.table(rows) //log the result in the console as a table
+
+        handleMainQuestion()//show the main question again
+    })
+}
