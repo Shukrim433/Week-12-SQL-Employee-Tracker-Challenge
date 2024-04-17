@@ -126,3 +126,13 @@ updateEmployee(employee) { //what is employee????????
 }
 
 }
+
+module.exports = EmployeeDatabase
+
+/*????????
+The parameter "department" would typically be passed to the addDepartment method from the code that calls it. 
+This code would likely be part of your application logic and would use the addDepartment method to insert a new 
+department into the database based on user input or other requirements. 
+
+ the parameter "department" likely refers to an object containing information about the department to be added 
+ to the database. This object may include properties such as "department_name" to specify the name of the department.*/
