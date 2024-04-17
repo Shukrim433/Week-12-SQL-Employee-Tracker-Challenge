@@ -20,7 +20,7 @@ VALUES ('jane', 'doe', 1, NULL), --null bcuz shes a sales lead so therefore does
         ('derek', 'shephard', 3, NULL),
         ('lexi', 'grey', 4, 4),
         ('mark', 'sloan', 6, NULL),
-        ('jackson', 'avery', 7, 5),
+        ('jackson', 'avery', 7, 6),
         ('alex', 'karev', 2, 1),
         ('arizona', 'robbins', 4, 4),
         ('callie', 'torez', 5, NULL);
