@@ -77,3 +77,89 @@ const view_employees = () => {
         handleMainQuestion()//show the main question again
     })
 }
+
+
+/*WHEN I choose to add a department
+THEN I am prompted to enter the name of the department and that department is added to the database */
+const add_department = () => {
+    inquirer.prompt(QuestionForAddingADepartment) //ask the user to enter the name of the department they want to add
+    .then((response) => { //response holds the users response to the question 'enter the name of the department you want to add' (i.e. the department name they type in)
+      db.addDepartment(response)
+      .then((results) => {  //result holds the result of that query to the database
+          console.log('\n', results, '\n')
+          handleMainQuestion()//show the main question again
+      })
+    })
+  }
+  
+  
+  /*WHEN I choose to add a role
+  THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database*/
+  const add_role = () => {
+      
+      db.getDepartments().then(({rows}) => { //rows = results.rows holds all the columns from the departments table
+          //console.log(results)
+          const theDepartmentQuestion = QuestionsForAddingARole[2] //'TheDepartmentQuestion' is this question: 'select the department of the new role'
+          
+          rows.forEach((departmentRow) => {               
+              theDepartmentQuestion.choices.push({           //essentially what this code is doing is iterating through all the rows/records in the departments table
+                  value: departmentRow.id,                    //and for each row of the table its accessing the value of its id column and name colum and putting that into an object
+                  name: departmentRow.role_name//user sees this              //each object is then pushed into the choices array (each obj is a choice) for TheDepartment question
+              })                                              //so that in the next section of the code the user is presented with these choices and can answer all the questions
+          })                                                 //for adding a role
+          
+          inquirer.prompt(QuestionsForAddingARole) //ask the user to enter the name, salary and select the department of the role they want to add
+          .then((response) => {//response holds the users response to the questions 'enter the name of the role you want to add' AND 'enter the salary of the new role' AND 'select the department of the new role'
+              console.log("Role object to be added:", response);
+          db.addRole(response)
+          .then((results) => {
+              console.log('\n', results, '\n')//result holds the result of that query to the database
+              handleMainQuestion()//show the main question again
+              })
+          })
+      })
+  
+  }
+  
+  /*WHEN I choose to add an employee
+  THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database */
+  const add_employee = () => {
+      db.getRoles().then(({rows}) => {
+          const theRoleQuestion = QuestionsForAddingAnEmployee[2]
+  
+          rows.forEach((roleRow) => {
+              theRoleQuestion.choices.push({
+                  value: roleRow.id,
+                  name: roleRow.title //user sees this
+              })
+          })
+  
+          db.getEmployees().then(({rows}) => {
+              const theManagerQuestion = QuestionsForAddingAnEmployee[3]
+  
+              rows.forEach((employee) => {
+                  theManagerQuestion.choices.push({
+                      value: employee.id,
+                      name: employee.name //user sees this
+                  })
+              })
+  
+              theManagerQuestion.choices.push({ //a blank option for the user to select in case the employee theyre adding doesnt have a manager
+                  value: null,
+                  name: 'doesnt have a manager'
+              })
+  
+              inquirer.prompt(QuestionsForAddingAnEmployee)
+              .then((response) => {
+                  db.addEmployee(response)
+                  .then((results) => {
+                      console.log('\n', results, '\n')//result holds the result of that query to the database
+                      handleMainQuestion()//show the main question again
+                  })
+              })
+          })
+      })
+  }
+  
+  
+  
