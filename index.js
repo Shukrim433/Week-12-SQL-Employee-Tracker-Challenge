@@ -161,5 +161,48 @@ const add_department = () => {
       })
   }
   
-  
+  /*WHEN I choose to update an employee role
+  THEN I am prompted to select an employee to update and their new role and this information is updated in the database */
+  const update_role = () => {
+    //select an employee to update
+    db.getEmployees().then(({rows}) => {
+        const theEmployeeQuestion = QuestionsForUpdatingAnEmployeesRole[0]
+        theEmployeeQuestion.choices = [] //clear choices before adding new ones
+        rows.forEach((employee) => {
+            theEmployeeQuestion.choices.push({
+                value: employee.id,
+                name: employee.name
+            })
+        })
+
+        db.getRoles().then(({rows})=> {
+            const theRoleUpdatingQuestion = QuestionsForUpdatingAnEmployeesRole[1]
+            theRoleUpdatingQuestion.choices = [] //clear choices before adding new ones
+            rows.forEach((role) => {
+                theRoleUpdatingQuestion.choices.push({
+                    value: role.id,
+                    name: role.title
+                })
+            })
+            inquirer.prompt(QuestionsForUpdatingAnEmployeesRole)
+            .then((response) => {
+                // construct employee object with role_id and id properties
+                const employee = {
+                    id: response.employee_id,
+                    role_id: response.role_id
+                };
+                db.updateEmployee(employee).then((results) => {
+                    console.log('\n', results, '\n')//result holds the result of that query to the database
+                    handleMainQuestion()//show the main question again
+                }).catch((error) => {
+                    console.error(error); //log any errors that occur during the update process
+                    handleMainQuestion(); //still proceed to main question even if there's an error
+                });
+            })
+        })
+    })
+}
+
+handleMainQuestion()
+
   
