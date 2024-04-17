@@ -6,7 +6,7 @@ THEN I am presented with the following options: view all departments, view all r
 const mainQuestion =  [
     {
         type : 'list',
-        name : 'option',
+        name : 'option', //When the user selects an option, the value of that option will be stored under the key specified by the name property. 
         message : 'what would you like to do?',
         choices : [
             {value : 'view_departments', name : 'view all departments'},
@@ -15,7 +15,7 @@ const mainQuestion =  [
             {value : 'add_department', name : 'add a department' },
             {value : 'add_role', name : 'add a role' },
             {value : 'add_employee', name : 'add an employee' },
-            {value : 'update_role', name : 'update and employee role' }
+            {value : 'update_role', name : 'update an employee role' }
             //in the options objects:
             // The "name" property is what gets displayed to the user as the selectable option.
             //The "value" property is what gets returned in the data object when the user makes a selection. 
@@ -42,7 +42,7 @@ const QuestionsForAddingARole = [
     {
         type : 'input',
         message : 'enter the name of the role you want to add',
-        name : 'role_name' // in the question objects however the name property : the user response/input will be stored so under the key 'department_name' in the data object returned by Inquirer.
+        name : 'title' // in the question objects however the name property : the user response/input will be stored so under the key 'department_name' in the data object returned by Inquirer.
     },
     {
         type : 'number',
