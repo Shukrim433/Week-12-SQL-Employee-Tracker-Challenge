@@ -5,7 +5,7 @@ CREATE DATABASE employee_db;
 
 CREATE TABLE department (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(30) UNIQUE NOT NULL, --constraint ensures that no two rows can have the same value(s) in the specified column(s).
+    name VARCHAR(30) UNIQUE NOT NULL --constraint ensures that no two rows can have the same value(s) in the specified column(s).
 );
 
 CREATE TABLE role (
